@@ -269,7 +269,7 @@ describe('BinarySerializer', () => {
 			x1.writeInt32(-32472)
 			x1.write('Next!','ascii')
 
-			expect([...x1.releaseBuffer()]).toEqual([ 21, 21, 0, 0, 40, 129, 255, 255, 0, 0, 0, 0, 78, 101, 120, 116, 33 ])
+			expect([...x1.releaseBuffer()]).toEqual([ 21, 21, 0, 40, 129, 255, 255, 78, 101, 120, 116, 33 ])
 		})
 
 		it('should supply correct buffer in big endian mode', ()=>{ 
@@ -280,7 +280,7 @@ describe('BinarySerializer', () => {
 			x1.writeInt32(-32472)
 			x1.write('Next!','ascii')
 
-			expect([...x1.releaseBuffer()]).toEqual([ 21, 0, 21, 0, 255, 255, 129, 40, 0, 0, 0, 0, 78, 101, 120, 116, 33 ])
+			expect([...x1.releaseBuffer()]).toEqual([ 21, 0, 21, 255, 255, 129, 40, 78, 101, 120, 116, 33 ])
 		})
 	})
 })
