@@ -92,58 +92,39 @@ describe('BinarySerializer', () => {
 
 	describe('writeDouble', ()=> {
 		it('should write double little endian, updating offset and length', ()=>{ 
-			x1.writeDouble(Math.Pi)
+			x1.writeDouble(3.14279)
 
 			expect(x1.offset).toEqual(8)
 			expect(x1.length).toEqual(8)
-			expect([...x1.buffer.slice(0,x1.length)]).toEqual([ 0, 0, 0, 0, 0, 0, 248, 127 ])
+			expect([...x1.buffer.slice(0,x1.length)]).toEqual([ 21, 145, 97, 21, 111, 36, 9, 64 ])
 		})
 
 		it('should write double big endian, updating offset and length', ()=>{
 			x1.bigEndian = true
-			x1.writeDouble(Math.Pi)
+			x1.writeDouble(3.14279)
 
 			expect(x1.offset).toEqual(8)
 			expect(x1.length).toEqual(8)
-			expect([...x1.buffer.slice(0,x1.length)]).toEqual([ 127, 248, 0, 0, 0, 0, 0, 0 ])
+			expect([...x1.buffer.slice(0,x1.length)]).toEqual([ 64, 9, 36, 111, 21, 97, 145, 21 ])
 		})
 	})
 
 	describe('writeFloat', ()=> {
 		it('should write float little endian, updating offset and length', ()=>{ 
-			x1.writeFloat(Math.Pi)
+			x1.writeFloat(0.25)
 
 			expect(x1.offset).toEqual(4)
 			expect(x1.length).toEqual(4)
-			expect([...x1.buffer.slice(0,x1.length)]).toEqual([ 0, 0, 192, 127 ])
+			expect([...x1.buffer.slice(0,x1.length)]).toEqual([ 0, 0, 128, 62 ])
 		})
 
 		it('should write float big endian, updating offset and length', ()=>{
 			x1.bigEndian = true
-			x1.writeFloat(Math.Pi)
+			x1.writeFloat(0.25)
 
 			expect(x1.offset).toEqual(4)
 			expect(x1.length).toEqual(4)
-			expect([...x1.buffer.slice(0,x1.length)]).toEqual([ 127, 192, 0, 0 ])
-		})
-	})
-
-	describe('writeFloat', ()=> {
-		it('should write float little endian, updating offset and length', ()=>{ 
-			x1.writeFloat(Math.Pi)
-
-			expect(x1.offset).toEqual(4)
-			expect(x1.length).toEqual(4)
-			expect([...x1.buffer.slice(0,x1.length)]).toEqual([ 0, 0, 192, 127 ])
-		})
-
-		it('should write float big endian, updating offset and length', ()=>{
-			x1.bigEndian = true
-			x1.writeFloat(Math.Pi)
-
-			expect(x1.offset).toEqual(4)
-			expect(x1.length).toEqual(4)
-			expect([...x1.buffer.slice(0,x1.length)]).toEqual([ 127, 192, 0, 0 ])
+			expect([...x1.buffer.slice(0,x1.length)]).toEqual([ 62, 128, 0, 0 ])
 		})
 	})
 
@@ -186,7 +167,7 @@ describe('BinarySerializer', () => {
 	})
 
 	describe('writeInt16', ()=> {
-		it('should write Int32 little endian, updating offset and length', ()=>{ 
+		it('should write Int16 little endian, updating offset and length', ()=>{ 
 			x1.writeInt16(0x1234)
 
 			expect(x1.offset).toEqual(2)
@@ -194,7 +175,7 @@ describe('BinarySerializer', () => {
 			expect([...x1.buffer.slice(0,x1.length)]).toEqual([ 0x34, 0x12 ])
 		})
 
-		it('should write Int32 big endian, updating offset and length', ()=>{
+		it('should write Int16 big endian, updating offset and length', ()=>{
 			x1.bigEndian = true
 			x1.writeInt16(0x1234)
 
