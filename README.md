@@ -13,7 +13,7 @@ npm install network-serializer
 
 ## Usage
 
-```nodejs
+```js
 const { BinarySerializer, BinaryDeserializer } = require('network-serializer')
 
 var ser = new BinarySerializer({ bigEndian: true })
