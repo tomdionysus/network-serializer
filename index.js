@@ -1,4 +1,4 @@
 module.exports = {
-	BinarySerializer: require('./lib/BinarySerializer'),
-	BinaryDeserializer: require('./lib/BinaryDeserializer')
+  BinarySerializer: require('./lib/BinarySerializer'),
+  BinaryDeserializer: require('./lib/BinaryDeserializer')
 }

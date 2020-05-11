@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/tomdionysus/network-serializer.svg?branch=master)](https://travis-ci.org/tomdionysus/network-serializer)
 [![Coverage Status](https://coveralls.io/repos/github/tomdionysus/network-serializer/badge.svg?branch=master)](https://coveralls.io/github/tomdionysus/network-serializer?branch=master)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 A byte-level serialiser package for NodeJS.
 
