@@ -172,4 +172,16 @@ describe('BinaryDeserializer', () => {
 			expect(x1.offset).toEqual(1)
 		})
 	})
+
+	describe('seek', ()=> {
+		it('should read BigUInt64 little endian, updating offset', ()=>{ 
+			x1.buffer = Buffer.from([ 86, 52, 18, 144, 120, 86, 52, 18 ])
+			expect(x1.readBigUInt64()).toEqual(0x1234567890123456n)
+			expect(x1.offset).toEqual(8)
+
+			x1.seek(4)
+			expect(x1.readUInt32()).toEqual(0x12345678)
+			expect(x1.offset).toEqual(8)
+		})
+	})
 })
