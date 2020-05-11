@@ -283,4 +283,44 @@ describe('BinarySerializer', () => {
 			expect([...x1.releaseBuffer()]).toEqual([ 21, 0, 21, 255, 255, 129, 40, 78, 101, 120, 116, 33 ])
 		})
 	})
+
+	describe('seek', ()=> {
+		it('should seek by changing offset', ()=>{ 
+			x1.writeUInt8(21)
+			x1.writeUInt16(21)
+			x1.writeInt32(-32472)
+			x1.write('Next!','ascii')
+
+			expect([...x1.releaseBuffer()]).toEqual([ 21, 21, 0, 40, 129, 255, 255, 78, 101, 120, 116, 33 ])
+
+			x1.seek(4)
+			
+			x1.writeUInt32(0xFFFFFFFF)
+
+			expect([...x1.releaseBuffer()]).toEqual([ 21, 21, 0, 40, 255, 255, 255, 255, 101, 120, 116, 33 ])
+			expect(x1.offset).toEqual(8)
+		})
+
+		it('should limit seek to length', ()=>{
+			x1.writeUInt8(21)
+			x1.writeUInt16(21)
+			x1.writeInt32(-32472)
+			x1.write('Next!','ascii')
+
+			expect(x1.offset).toEqual(12)
+			x1.seek(200)
+			expect(x1.offset).toEqual(12)
+		})
+
+		it('should limit seek to zero', ()=>{ 
+			x1.writeUInt8(21)
+			x1.writeUInt16(21)
+			x1.writeInt32(-32472)
+			x1.write('Next!','ascii')
+
+			expect(x1.offset).toEqual(12)
+			x1.seek(-5500)
+			expect(x1.offset).toEqual(0)
+		})
+	})
 })
