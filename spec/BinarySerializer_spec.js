@@ -22,6 +22,24 @@ describe('BinarySerializer', () => {
 			expect(x1.buffer.length).toEqual(15)
 			expect([...x1.buffer]).toEqual([ 5, 10, 15, 20, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ])
 		})
+
+		it('should not reallocate if new size is == current size', ()=>{ 
+			var x1 = new BinarySerializer({ buffer: Buffer.from([ 5, 10, 15, 20 ]) })
+
+			x1._reallocate(4)
+
+			expect(x1.buffer.length).toEqual(4)
+			expect([...x1.buffer]).toEqual([ 5, 10, 15, 20 ])
+		})
+
+		it('should not reallocate if new size is < current size', ()=>{ 
+			var x1 = new BinarySerializer({ buffer: Buffer.from([ 5, 10, 15, 20 ]) })
+
+			x1._reallocate(3)
+
+			expect(x1.buffer.length).toEqual(4)
+			expect([...x1.buffer]).toEqual([ 5, 10, 15, 20 ])
+		})
 	})
 
 	describe('_ensureHeadroom', ()=> {
@@ -51,6 +69,24 @@ describe('BinarySerializer', () => {
 			expect(x1.offset).toEqual(4)
 			expect(x1.length).toEqual(4)
 			expect([...x1.buffer.slice(0,x1.length)]).toEqual([ 0xDE, 0xAD, 0xBE, 0xEF ])
+		})
+	})
+
+	describe('writeBytes', ()=> {
+		it('should write bytes with offset and length', ()=>{ 
+			x1.writeBytes(Buffer.from([ 1,2,3,4,5,6 ]), 2, 2)
+
+			expect(x1.offset).toEqual(2)
+			expect(x1.length).toEqual(2)
+			expect([...x1.buffer.slice(0,x1.length)]).toEqual([ 3, 4 ])
+		})
+
+		it('should write bytes for entire buffer', ()=>{ 
+			x1.writeBytes(Buffer.from([ 1,2,3,4,5,6 ]))
+
+			expect(x1.offset).toEqual(6)
+			expect(x1.length).toEqual(6)
+			expect([...x1.buffer.slice(0,x1.length)]).toEqual([ 1,2,3,4,5,6 ])
 		})
 	})
 
