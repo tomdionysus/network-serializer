@@ -1,6 +1,6 @@
 {
   "name": "network-serializer",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A byte-level serialiser package for NodeJS",
   "main": "index.js",
   "scripts": {
